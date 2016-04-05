@@ -1,0 +1,10 @@
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\CS.DesafioGlaucia.Web.dll.config
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\CS.DesafioGlaucia.Web.dll
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\CS.DesafioGlaucia.Web.pdb
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\obj\Debug\CS.DesafioGlaucia.Web.csprojResolveAssemblyReference.cache
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\obj\Debug\CS.DesafioGlaucia.Web.dll
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\obj\Debug\CS.DesafioGlaucia.Web.pdb
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\EntityFramework.dll
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\EntityFramework.SqlServer.dll
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\EntityFramework.xml
+C:\Users\Glaucia\Documents\Labs\Desafio_Concrete\src\CS.DesafioGlaucia.Web\bin\EntityFramework.SqlServer.xml
