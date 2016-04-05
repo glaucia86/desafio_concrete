@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="glAuthenticationDesafioConcrete" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Glaucia\\Documents\\Labs\\desafio_concrete\\src\\CS\.DesafioGlaucia\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Glaucia\\Documents\\Labs\\desafio_concrete\\src\\CS\.DesafioGlaucia\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>

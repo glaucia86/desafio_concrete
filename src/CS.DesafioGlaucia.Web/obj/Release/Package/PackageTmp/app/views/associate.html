@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+    <div class="col-md-8">
+        <h3>Associe sua conta com {{registerData.provider}} Conta</h3>
+        <hr />
+        <p class="text-success">
+            Você conseguiu autenticar com sucesso <strong>. Por favor, entre com o nome de usuário abaixo para no site e clique no botão Registrar para Entrar</strong>
+        </p>
+        <div class="row">
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Usuário" data-ng-model="registerData.usuario" required autofocus>
+                    <button class="btn btn-sm btn-info btn-block" type="button" style="margin-top: 10px;" data-ng-click="registerExternal()">Registrar</button>
+                </div>
+                <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                    {{message}}
+                </div>
+            </div>
+            <div class="col-md-3">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        &nbsp;
+    </div>
+</div>

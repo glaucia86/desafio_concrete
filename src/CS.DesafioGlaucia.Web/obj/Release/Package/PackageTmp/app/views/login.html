@@ -1,0 +1,9 @@
+﻿<form class="form-login" role="form">
+    <h2 class="form-login-heading">Entrar</h2>
+    <input type="text" class="form-control" placeholder="Usuário" data-ng-model="loginData.usuario" required autofocus />
+    <input type="password" class="form-control" placeholder="Senha" data-ng-model="loginData.senha" required />
+    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="login()">Entrar</button>
+    <div data-ng-hide="message == ''" class="alert alert-danger">
+        {{message}}
+    </div>
+</form>

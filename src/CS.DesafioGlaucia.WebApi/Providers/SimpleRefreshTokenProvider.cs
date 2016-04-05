@@ -22,7 +22,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             {
                 var refreshTokenLifeTime = context.OwinContext.Get<string>("as:clientRefreshTokenLifeTime");
 
-                var token = new RefreshToken()
+                var token = new RefreshToken
                 {
                     RefreshTokenId = Helper.GetHash(refreshTokenId),
                     ClientId = clientid,
@@ -47,13 +47,12 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
-
             var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedOrigin});
 
-            string hashedTokenId = Helper.GetHash(context.Token);
+            var hashedTokenId = Helper.GetHash(context.Token);
 
-            using (AuthRepository repository = new AuthRepository())
+            using (var repository = new AuthRepository())
             {
                 var refreshToken = await repository.EncontrarRefreshToken(hashedTokenId);
 
@@ -74,6 +73,5 @@ namespace CS.DesafioGlaucia.WebApi.Providers
         {
             throw new NotImplementedException();
         }
-
     }
 }

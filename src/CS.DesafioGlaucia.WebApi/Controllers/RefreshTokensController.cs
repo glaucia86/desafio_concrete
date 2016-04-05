@@ -6,7 +6,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
     [RoutePrefix("api/RefreshTokens")]
     public class RefreshTokensController : ApiController
     {
-        private AuthRepository repository = null;
+        private readonly AuthRepository repository;
 
         public RefreshTokensController()
         {
@@ -28,10 +28,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             {
                 return Ok();
             }
-            else
-            {
-                return BadRequest("O Token Id não existe");
-            }
+            return BadRequest("O Token Id não existe");
         }
 
         protected override void Dispose(bool disposing)

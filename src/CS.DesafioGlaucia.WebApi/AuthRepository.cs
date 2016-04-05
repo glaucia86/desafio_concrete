@@ -12,10 +12,11 @@ namespace CS.DesafioGlaucia.WebApi
     /* Aqui estou definindo a parte lógica com respeito ao usuário. 
      * a propriedade "UserManager" será o responsável para poder criptografar a senha, como e quando validar o
        usuário e para gerenciar os claims da aplicação */
+
     public class AuthRepository : IDisposable
     {
-        private AuthContext context;
-        private UserManager<IdentityUser> userManager;
+        private readonly AuthContext context;
+        private readonly UserManager<IdentityUser> userManager;
 
         public AuthRepository()
         {
@@ -23,9 +24,15 @@ namespace CS.DesafioGlaucia.WebApi
             userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
         }
 
+        public void Dispose()
+        {
+            context.Dispose();
+            userManager.Dispose();
+        }
+
         public async Task<IdentityResult> RegistrarUsuario(UsuarioModel usuarioModel)
         {
-            var user = new IdentityUser()
+            var user = new IdentityUser
             {
                 UserName = usuarioModel.Usuario
             };
@@ -64,7 +71,7 @@ namespace CS.DesafioGlaucia.WebApi
             context.RefreshTokens.Add(token);
 
             return await context.SaveChangesAsync() > 0;
-        } 
+        }
 
         public async Task<bool> RemoverRefreshToken(string refreshTokenId)
         {
@@ -95,12 +102,6 @@ namespace CS.DesafioGlaucia.WebApi
         public List<RefreshToken> SelecionarTodosRefreshToken()
         {
             return context.RefreshTokens.ToList();
-        }
-
-        public void Dispose()
-        {
-            context.Dispose();
-            userManager.Dispose();
         }
     }
 }

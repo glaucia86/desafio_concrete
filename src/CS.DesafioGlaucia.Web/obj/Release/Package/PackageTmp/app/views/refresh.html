@@ -1,0 +1,28 @@
+﻿<div class="row">
+    <div class="col-md-3">
+        &nbsp;
+    </div>
+    <div class="col-md-6">
+        <p data-ng-hide="authentication.useRefreshTokens">Usuário <strong>{{authentication.usuario}}</strong> foi desativado. <strong>Atualizar os Tokens</strong> uma vez logado, você não pode atualizar os tokens.</p>
+        <div data-ng-show="authentication.useRefreshTokens">
+            <p class="text-success">Utilize esta página para obter um novo token de acesso.</p>
+            <p>O Usuário <strong>{{authentication.nomeUsuario}}</strong> has enabled <strong>Atualizar os Tokens</strong> uma vez logado, atualizar seu atual token de acesso clicando no botão abaixo.</p>
+            <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="refreshToken()" data-ng-disabled="!authentication.userName && !authentication.useRefreshTokens">Atualizar Token</button>
+        </div>
+        <div data-ng-show="authentication.useRefreshTokens" style="margin-top:10px;">
+            <div class="panel panel-success" data-ng-show="tokenRefreshed">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Token Atualizado com sucesso</h3>
+                </div>
+                <div class="panel-body">
+                    <p>Access_token: {{tokenResponse.access_token | limitTo : 30}}....</p>
+                    <p><a href="#/orders">Clique aqui para visualizar os pedidos usando um novo Token de Acesso.</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-3">
+        &nbsp;
+    </div>
+</div>

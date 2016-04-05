@@ -7,7 +7,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
 {
     public class AccountController : ApiController
     {
-        private AuthRepository repository;
+        private readonly AuthRepository repository;
 
         public AccountController()
         {
@@ -26,7 +26,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
 
             var resultado = await repository.RegistrarUsuario(usuarioModel);
 
-            IHttpActionResult errorResult = RetornarErro(resultado);
+            var errorResult = RetornarErro(resultado);
 
             if (errorResult != null)
             {
@@ -47,6 +47,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
         }
 
         /* Esse método aqui irá retornar e validar o usuarioModel */
+
         private IHttpActionResult RetornarErro(IdentityResult resultado)
         {
             if (resultado == null)
@@ -58,7 +59,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             {
                 if (resultado.Errors != null)
                 {
-                    foreach (string error in resultado.Errors)
+                    foreach (var error in resultado.Errors)
                     {
                         ModelState.AddModelError("", error);
                     }

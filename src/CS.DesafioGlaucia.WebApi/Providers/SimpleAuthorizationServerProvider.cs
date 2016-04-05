@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CS.DesafioGlaucia.WebApi.Entities;
+using CS.DesafioGlaucia.WebApi.Models;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 
 namespace CS.DesafioGlaucia.WebApi.Providers
 {
@@ -16,8 +17,8 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            string clientId = string.Empty;
-            string clientSecret = string.Empty;
+            var clientId = string.Empty;
+            var clientSecret = string.Empty;
             Cliente client = null;
 
             if (!context.TryGetBasicCredentials(out clientId, out clientSecret))
@@ -43,7 +44,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
                 return Task.FromResult<object>(null);
             }
 
-            if (client.ApplicationType == Models.ApplicationTypes.NativeConfidential)
+            if (client.ApplicationType == ApplicationTypes.NativeConfidential)
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {
@@ -65,8 +66,8 @@ namespace CS.DesafioGlaucia.WebApi.Providers
                 return Task.FromResult<object>(null);
             }
 
-            context.OwinContext.Set<string>("as:clientAllowedOrigin", client.AllowedOrigin);
-            context.OwinContext.Set<string>("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
+            context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
+            context.OwinContext.Set("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
 
             context.Validated();
 
@@ -83,7 +84,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
             if (allowedOrigin == null) allowedOrigin = "*";
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {"*"});
 
             using (var repository = new AuthRepository())
             {
@@ -101,7 +102,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             identity.AddClaim(new Claim(ClaimTypes.Role, "usuario"));
             identity.AddClaim(new Claim("sub", context.UserName));
 
-            var props = new AuthenticationProperties(new Dictionary<string, string>()
+            var props = new AuthenticationProperties(new Dictionary<string, string>
             {
                 {
                     "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
@@ -113,7 +114,6 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
             var ticket = new AuthenticationTicket(identity, props);
             context.Validated(ticket);
-
         }
 
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
@@ -146,7 +146,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
-            foreach (KeyValuePair<string, string> propriedade in context.Properties.Dictionary)
+            foreach (var propriedade in context.Properties.Dictionary)
             {
                 context.AdditionalResponseParameters.Add(propriedade.Key, propriedade.Value);
             }

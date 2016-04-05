@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="SpaApplicationAuthApp">
+<head>
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+    <title>Desafio Concrete Solutions - Glaucia Lemos</title>
+    <link href="content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="content/css/site.css" rel="stylesheet" />
+    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <a class="navbar-brand" href="#/">Página Principal</a>
+            </div>
+            <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-ng-hide="!authentication.isAuth"><a href="#">Bem-Vindo {{authentication.usuario}}</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/orders">Meus Pedidos</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Sair</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Entrar</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Cadastrar</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class="page-header text-center">
+                <h1>Desafio Concrete Solutions - Glaucia Lemos</h1>
+            </div>
+            <div class="text-center">
+                <p>Desafio .NET Concrete Solutions - Aplicação SPA API RestFul com WEBAPI</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div data-ng-view="">
+        </div>
+    </div>
+    <hr />
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="text-muted">
+                        Desenvolvido por - Glaucia Lemos. About.me: <a target="_blank" href="https://about.me/glaucia_lemos86">Sobre Mim</a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="text-muted">Blog Técnico - Glaucia Lemos: <a target="_blank" href="https://code4coders.wordpress.com/">Code4Coders</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
+    <script src="scripts/loading-bar.min.js"></script>
+
+    <script src="app/app.js?v=2"></script>
+
+    <script src="app/services/authInterceptorService.js"></script>
+    <script src="app/services/authService.js"></script>
+    <script src="app/services/ordersService.js"></script>
+
+    <!-- Carregar os Controllers -->
+    <script src="app/controllers/indexController.js"></script>
+    <script src="app/controllers/homeController.js"></script>
+    <script src="app/controllers/loginController.js"></script>
+    <script src="app/controllers/signupController.js"></script>
+    <script src="app/controllers/ordersController.js"></script>
+
+</body>
+</html>

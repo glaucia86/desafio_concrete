@@ -1,18 +1,15 @@
+using System.Data.Entity.Migrations;
+
 namespace CS.DesafioGlaucia.WebApi.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<CS.DesafioGlaucia.WebApi.AuthContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AuthContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(CS.DesafioGlaucia.WebApi.AuthContext context)
+        protected override void Seed(AuthContext context)
         {
             //  This method will be called after migrating to the latest version.
 

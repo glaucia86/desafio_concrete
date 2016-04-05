@@ -8,15 +8,15 @@ namespace CS.DesafioGlaucia.WebApi.Results
 {
     public class ChallangeResult : IHttpActionResult
     {
-        public string LoginProvider { get; set; }
-
-        public HttpRequestMessage Request { get; set; }
-
         public ChallangeResult(string loginProvider, ApiController controller)
         {
             loginProvider = loginProvider;
             Request = controller.Request;
         }
+
+        public string LoginProvider { get; set; }
+
+        public HttpRequestMessage Request { get; set; }
 
         public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
