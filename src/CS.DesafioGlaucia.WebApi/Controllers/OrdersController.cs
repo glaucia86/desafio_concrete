@@ -24,6 +24,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
 
         public bool Enviado { get; set; }
 
+
         public static List<Pedido> CriarPedidos()
         {
             var listaPedido = new List<Pedido>
