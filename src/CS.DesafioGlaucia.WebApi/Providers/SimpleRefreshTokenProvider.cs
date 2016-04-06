@@ -22,7 +22,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             {
                 var refreshTokenLifeTime = context.OwinContext.Get<string>("as:clientRefreshTokenLifeTime");
 
-                var token = new RefreshToken
+                var token = new RefreshToken()
                 {
                     RefreshTokenId = Helper.GetHash(refreshTokenId),
                     ClientId = clientid,
@@ -45,6 +45,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             }
         }
 
+
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
             var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
@@ -63,6 +64,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
                 }
             }
         }
+
 
         public void Create(AuthenticationTokenCreateContext context)
         {
