@@ -12,6 +12,7 @@ namespace CS.DesafioGlaucia.WebApi.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
+
         protected override void Seed(AuthContext context)
         {
             if (context.Clients.Count() > 0)
@@ -23,9 +24,9 @@ namespace CS.DesafioGlaucia.WebApi.Migrations
             context.SaveChanges();
         }
 
+
         private static List<Cliente> CriarListaClientes()
         {
-
             var listaClientes = new List<Cliente>()
             {
                 new Cliente

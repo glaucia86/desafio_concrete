@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using CS.DesafioGlaucia.WebApi.Entities;
 using CS.DesafioGlaucia.WebApi.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 
@@ -11,10 +12,8 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
-        //ValidateClientAuthentication
         /* Ese método irá validar o cliente. E retornará se a validação foi
          * realizada com sucesso */
-
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             var clientId = string.Empty;
@@ -39,8 +38,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
             if (client == null)
             {
-                context.SetError("invalid_clientId",
-                    string.Format("Cliente '{0}' não está registrado no sistema", context.ClientId));
+                context.SetError("invalid_clientId", string.Format("Cliente '{0}' não está registrado no sistema", context.ClientId));
                 return Task.FromResult<object>(null);
             }
 
@@ -49,6 +47,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {
                     context.SetError("invalid_clientId", "O segredo do cliente deve ser enviado.");
+                    return Task.FromResult<object>(null);
                 }
                 else
                 {
@@ -74,9 +73,11 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             return Task.FromResult<object>(null);
         }
 
+
         //GrantResourceOwnerCredentials
         /* Esse método irá validar o "usuario" e a "senha". Onde irá realizar a chamada do método: "EncontrarUsuario"
          * assim, verificará se o usuário e a senha são válidos. */
+
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
@@ -84,11 +85,11 @@ namespace CS.DesafioGlaucia.WebApi.Providers
 
             if (allowedOrigin == null) allowedOrigin = "*";
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {"*"});
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
             using (var repository = new AuthRepository())
             {
-                var user = await repository.EncontrarUsuario(context.UserName, context.Password);
+                IdentityUser user = await repository.EncontrarUsuario(context.UserName, context.Password);
 
                 if (user == null)
                 {
@@ -107,14 +108,16 @@ namespace CS.DesafioGlaucia.WebApi.Providers
                 {
                     "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
                 },
+
                 {
-                    "usuario", context.UserName
+                    "usarName", context.UserName
                 }
             });
 
             var ticket = new AuthenticationTicket(identity, props);
             context.Validated(ticket);
         }
+
 
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
         {
@@ -124,6 +127,7 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             if (clienteOriginal != clienteAtual)
             {
                 context.SetError("invalid_clientId", "O Token Atualizado é diferente do emitido para o clienteId");
+
                 return Task.FromResult<object>(null);
             }
 
@@ -144,9 +148,10 @@ namespace CS.DesafioGlaucia.WebApi.Providers
             return Task.FromResult<object>(null);
         }
 
+
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
-            foreach (var propriedade in context.Properties.Dictionary)
+            foreach (KeyValuePair<string, string> propriedade in context.Properties.Dictionary)
             {
                 context.AdditionalResponseParameters.Add(propriedade.Key, propriedade.Value);
             }
