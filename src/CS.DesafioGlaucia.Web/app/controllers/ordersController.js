@@ -8,7 +8,6 @@ app.controller('ordersController', ['$scope', 'ordersService', function ($scope,
         $scope.orders = results.data;
 
     }, function (error) {
-        //alert(error.data.message);
-    });
 
+    });
 }]);

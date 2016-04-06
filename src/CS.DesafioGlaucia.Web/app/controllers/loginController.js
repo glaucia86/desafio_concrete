@@ -17,6 +17,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         },
 
          function (err) {
+
              $scope.message = err.error_description;
          });
     };
@@ -24,7 +25,6 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
     $scope.authExternalProvider = function (provider) {
 
         var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
-
         var externalProviderUrl = ngAuthSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
                                                                     + "&response_type=token&client_id=" + ngAuthSettings.clientId
                                                                     + "&redirect_uri=" + redirectUri;
@@ -42,6 +42,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
                 authService.logOut();
 
                 authService.externalAuthData = {
+
                     provider: fragment.provider,
                     userName: fragment.external_user_name,
                     externalAccessToken: fragment.external_access_token
@@ -50,12 +51,16 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
                 $location.path('/associate');
             }
             else {
+
                 var externalData = { provider: fragment.provider, externalAccessToken: fragment.external_access_token };
                 authService.obtainAccessToken(externalData).then(function (response) {
 
                     $location.path('/orders');
+
                 },
+
              function (err) {
+
                  $scope.message = err.error_description;
              });
             }
