@@ -1,8 +1,7 @@
 ﻿'use strict';
-
 app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
         
-    var serviceBase = 'https://glauthenticationdesafioconcrete.azurewebsites.net/';
+    var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var ordersServiceFactory = {};
 
     var _getOrders = function() {

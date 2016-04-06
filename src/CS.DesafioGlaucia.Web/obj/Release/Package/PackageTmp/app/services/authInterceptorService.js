@@ -1,44 +1,45 @@
-﻿/* Arquivo responsável para tratar os erros */
+﻿'use strict';
+app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
 
-'use strict';
+    var authInterceptorServiceFactory = {};
 
-app.factory('authInterceptorService', [
-    '$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
+    var _request = function (config) {
 
-        var authInterceptorServiceFactory = {};
+        config.headers = config.headers || {};
 
-        var _request = function (config) {
+        var authData = localStorageService.get('authorizationData');
+        if (authData) {
+            config.headers.Authorization = 'Bearer ' + authData.token;
+        }
 
-            config.headers = config.headers || {};
+        return config;
+    }
 
+    var _responseError = function (rejection) {
+
+        if (rejection.status === 401) {
+
+            var authService = $injector.get('authService');
             var authData = localStorageService.get('authorizationData');
+
             if (authData) {
-                config.headers.Authorization = 'Bearer ' + authData.token;
-            }
 
-            return config;
-        }
+                if (authData.useRefreshTokens) {
 
-        var _responseError = function (rejection) {
-            if (rejection.status === 401) {
-                var authService = $injector.get('authService');
-                var authData = localStorageService.get('authorizationData');
-
-                if (authData) {
-                    if (authData.useRefreshTokens) {
-                        $location.path('/refresh');
-                        return $q.reject(rejection);
-                    }
+                    $location.path('/refresh');
+                    return $q.reject(rejection);
                 }
-                authService.logOut();
-                $location.path('/login');
             }
 
-            return $q.reject(rejection);
+            authService.logOut();
+            $location.path('/login');
         }
 
-        authInterceptorServiceFactory.request = _request;
-        authInterceptorServiceFactory.responseError = _responseError;
+        return $q.reject(rejection);
+    }
 
-        return authInterceptorServiceFactory;
+    authInterceptorServiceFactory.request = _request;
+    authInterceptorServiceFactory.responseError = _responseError;
+
+    return authInterceptorServiceFactory;
 }]);

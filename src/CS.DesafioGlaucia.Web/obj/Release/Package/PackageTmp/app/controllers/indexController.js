@@ -1,13 +1,12 @@
 ﻿'user strict';
 
-app.controller('indexController', [
-    '$scope', '$location', 'authService', function($scope, $location, authService) {
+app.controller('indexController', ['$scope', '$location', 'authService', function ($scope, $location, authService) {
 
-        $scope.logOut = function() {
-            authService.logOut();
-            $location.path('/home');
-        }
+    $scope.logOut = function () {
 
-        $scope.authentication = authService.authentication;
+        authService.logOut();
+        $location.path('/home');
     }
-]);
+
+    $scope.authentication = authService.authentication;
+}]);

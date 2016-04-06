@@ -4,66 +4,66 @@ var PLURAL_CATEGORY = {ZERO: "zero", ONE: "one", TWO: "two", FEW: "few", MANY: "
 $provide.value("$locale", {
   "DATETIME_FORMATS": {
     "AMPMS": [
-      "AM",
-      "PM"
+      "PG",
+      "PTG"
     ],
     "DAY": [
-      "Linggo",
-      "Lunes",
-      "Martes",
-      "Miyerkules",
-      "Huwebes",
-      "Biyernes",
-      "Sabado"
+      "Ahad",
+      "Isnin",
+      "Selasa",
+      "Rabu",
+      "Khamis",
+      "Jumaat",
+      "Sabtu"
     ],
     "MONTH": [
-      "Enero",
-      "Pebrero",
-      "Marso",
-      "Abril",
-      "Mayo",
-      "Hunyo",
-      "Hulyo",
-      "Agosto",
-      "Setyembre",
-      "Oktubre",
-      "Nobyembre",
-      "Disyembre"
+      "Januari",
+      "Februari",
+      "Mac",
+      "April",
+      "Mei",
+      "Jun",
+      "Julai",
+      "Ogos",
+      "September",
+      "Oktober",
+      "November",
+      "Disember"
     ],
     "SHORTDAY": [
-      "Lin",
-      "Lun",
-      "Mar",
-      "Mye",
-      "Huw",
-      "Bye",
+      "Ahd",
+      "Isn",
+      "Sel",
+      "Rab",
+      "Kha",
+      "Jum",
       "Sab"
     ],
     "SHORTMONTH": [
-      "Ene",
-      "Peb",
-      "Mar",
-      "Abr",
-      "May",
-      "Hun",
-      "Hul",
-      "Ago",
-      "Set",
+      "Jan",
+      "Feb",
+      "Mac",
+      "Apr",
+      "Mei",
+      "Jun",
+      "Jul",
+      "Ogos",
+      "Sep",
       "Okt",
-      "Nob",
+      "Nov",
       "Dis"
     ],
-    "fullDate": "EEEE, MMMM dd y",
-    "longDate": "MMMM d, y",
-    "medium": "MMM d, y HH:mm:ss",
-    "mediumDate": "MMM d, y",
-    "mediumTime": "HH:mm:ss",
-    "short": "M/d/yy HH:mm",
-    "shortDate": "M/d/yy",
-    "shortTime": "HH:mm"
+    "fullDate": "EEEE, d MMMM y",
+    "longDate": "d MMMM y",
+    "medium": "dd/MM/yyyy h:mm:ss a",
+    "mediumDate": "dd/MM/yyyy",
+    "mediumTime": "h:mm:ss a",
+    "short": "d/MM/yy h:mm a",
+    "shortDate": "d/MM/yy",
+    "shortTime": "h:mm a"
   },
   "NUMBER_FORMATS": {
-    "CURRENCY_SYM": "\u20b1",
+    "CURRENCY_SYM": "RM",
     "DECIMAL_SEP": ".",
     "GROUP_SEP": ",",
     "PATTERNS": [
@@ -93,7 +93,7 @@ $provide.value("$locale", {
       }
     ]
   },
-  "id": "tl",
-  "pluralCat": function (n) {  if (n == 0 || n == 1) {   return PLURAL_CATEGORY.ONE;  }  return PLURAL_CATEGORY.OTHER;}
+  "id": "ms-my",
+  "pluralCat": function (n) {  return PLURAL_CATEGORY.OTHER;}
 });
 }]);

@@ -1,12 +1,11 @@
 ﻿'use strict';
-
 app.controller('associateController', ['$scope', '$location', '$timeout', 'authService', function ($scope, $location, $timeout, authService) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
 
     $scope.registerData = {
-        usuario: authService.externalAuthData.usuario,
+        userName: authService.externalAuthData.userName,
         provider: authService.externalAuthData.provider,
         externalAccessToken: authService.externalAuthData.externalAccessToken
     };
@@ -24,6 +23,7 @@ app.controller('associateController', ['$scope', '$location', '$timeout', 'authS
                 for (var key in response.modelState) {
                     errors.push(response.modelState[key]);
                 }
+
                 $scope.message = "Falha ao registrar o usuário devido a:" + errors.join(' ');
             });
     };

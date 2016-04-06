@@ -8,12 +8,13 @@ app.controller('refreshController', ['$scope', '$location', 'authService', funct
     $scope.refreshToken = function () {
 
         authService.refreshToken().then(function (response) {
+
             $scope.tokenRefreshed = true;
             $scope.tokenResponse = response;
         },
+
          function (err) {
              $location.path('/login');
          });
     };
-
 }]);
