@@ -38,6 +38,7 @@ namespace CS.DesafioGlaucia.WebApi
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, CS.DesafioGlaucia.WebApi.Migrations.Configuration>());
         }
 
+
         public void ConfigurarOAuth(IAppBuilder app)
         {
             app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);

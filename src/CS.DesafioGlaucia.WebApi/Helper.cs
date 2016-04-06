@@ -8,10 +8,10 @@ namespace CS.DesafioGlaucia.WebApi
     {
         public static string GetHash(string input)
         {
-            HashAlgorithm hashAlgoritmo = new SHA256CryptoServiceProvider();
+            HashAlgorithm temAlgoritmo = new SHA256CryptoServiceProvider();
 
-            var valorByte = Encoding.UTF8.GetBytes(input);
-            var byteHash = hashAlgoritmo.ComputeHash(valorByte);
+            byte[] valorByte = Encoding.UTF8.GetBytes(input);
+            byte[] byteHash = temAlgoritmo.ComputeHash(valorByte);
 
             return Convert.ToBase64String(byteHash);
         }

@@ -17,15 +17,17 @@ namespace CS.DesafioGlaucia.ResourceServer
 
             ConfigureOAuth(app);
 
-            WebApiConfig.Registrar(config);
+            WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-
         }
+
 
         private void ConfigureOAuth(IAppBuilder app)
         {
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+            
+            /* Aqui irá consumir o token */
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
         }
     }

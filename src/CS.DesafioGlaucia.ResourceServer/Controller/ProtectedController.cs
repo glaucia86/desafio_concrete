@@ -14,11 +14,7 @@ namespace CS.DesafioGlaucia.ResourceServer.Controller
         {
             var identity = User.Identity as ClaimsIdentity;
 
-            return identity.Claims.Select(c => new
-            {
-                Type = c.Type,
-                Value = c.Value
-            });
+            return identity.Claims.Select(c => new { Type = c.Type, Value = c.Value });
         }
     }
 }

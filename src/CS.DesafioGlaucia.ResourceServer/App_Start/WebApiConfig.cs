@@ -7,7 +7,7 @@ namespace CS.DesafioGlaucia.ResourceServer
 {
     public class WebApiConfig
     {
-        public static void Registrar(HttpConfiguration config)
+        public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
 
