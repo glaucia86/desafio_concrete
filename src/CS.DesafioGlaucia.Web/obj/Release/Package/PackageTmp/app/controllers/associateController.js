@@ -24,7 +24,7 @@ app.controller('associateController', ['$scope', '$location', '$timeout', 'authS
                 for (var key in response.modelState) {
                     errors.push(response.modelState[key]);
                 }
-                $scope.message = "Failed to register user due to:" + errors.join(' ');
+                $scope.message = "Falha ao registrar o usuário devido a:" + errors.join(' ');
             });
     };
 

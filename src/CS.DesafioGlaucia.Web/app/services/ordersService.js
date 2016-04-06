@@ -2,7 +2,7 @@
 
 app.factory('ordersService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
         
-    var serviceBase = 'http://glauthenticationdesafioconcrete.azurewebsites.net/';
+    var serviceBase = 'https://glauthenticationdesafioconcrete.azurewebsites.net/';
     var ordersServiceFactory = {};
 
     var _getOrders = function() {

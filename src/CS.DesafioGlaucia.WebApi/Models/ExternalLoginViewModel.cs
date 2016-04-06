@@ -23,9 +23,9 @@ namespace CS.DesafioGlaucia.WebApi.Models
         public string ExternalAccessToken { get; set; }
     }
 
-    public class ParseExternalAccessToken
+    public class ParsedExternalAccessToken
     {
-        public string userId { get; set; }
-        public string appId { get; set; }
+        public string user_id { get; set; }
+        public string app_id { get; set; }
     }
 }

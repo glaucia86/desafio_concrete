@@ -2,6 +2,8 @@
 using System.Web.Http;
 using CS.DesafioGlaucia.WebApi;
 using CS.DesafioGlaucia.WebApi.Providers;
+using Microsoft.Owin.Security.Facebook;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
@@ -16,6 +18,10 @@ namespace CS.DesafioGlaucia.WebApi
     public class Startup
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+
+        public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
+        public static FacebookAuthenticationOptions facebookAuthOptions { get; private set; }
+
 
         /* Aqui estou realizando a configuração da aplicação do projeto */
 

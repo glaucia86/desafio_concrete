@@ -28,7 +28,7 @@ app.controller('signupController', [
                             errors.push(response.data.modelState[key][i]);
                         }
                     }
-                    $scope.message = "Erro ao registrar o usuário devido a" + setErrorStatus.join(' ');
+                    $scope.message = "Erro ao registrar o usuário devido a" + errors.join(' ');
                 });
         };
 
