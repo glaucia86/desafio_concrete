@@ -52,16 +52,6 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             return Ok();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                repository.Dispose();
-            }
-
-            base.Dispose(disposing);
-        }
-
         //GET: api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -101,7 +91,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
                 return new ChallangeResult(provider, this);
             }
 
-            var user = await repository.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
+            IdentityUser user = await repository.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
             bool estaRegistrado = user != null;
 
@@ -115,6 +105,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
 
             return Redirect(redirectUri);
         }
+
 
         //POST: api/Account/RegisterExternal
         [AllowAnonymous]
@@ -145,6 +136,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             user = new IdentityUser() { UserName = model.UserName };
 
             IdentityResult result = await repository.CreateAsync(user);
+
             if (!result.Succeeded)
             {
                 return RetornarErro(result);
@@ -157,6 +149,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             };
 
             result = await repository.AddLoginAsync(user.Id, info.Login);
+
             if (!result.Succeeded)
             {
                 return RetornarErro(result);
@@ -168,12 +161,12 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             return Ok(accessTokenResponse);
         }
 
+
         [AllowAnonymous]
         [HttpGet]
         [Route("ObtainLocalAccessToken")]
         public async Task<IHttpActionResult> ObterLocalAccessToken(string provider, string externalAccessToken)
         {
-
             if (string.IsNullOrWhiteSpace(provider) || string.IsNullOrWhiteSpace(externalAccessToken))
             {
                 return BadRequest("O Provider ou acesso externo do token não foi enviado.");
@@ -202,6 +195,17 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
         }
 
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                repository.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+
         /* Esse método aqui irá retornar e validar o usuarioModel */
         private IHttpActionResult RetornarErro(IdentityResult resultado)
         {
@@ -214,7 +218,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             {
                 if (resultado.Errors != null)
                 {
-                    foreach (var error in resultado.Errors)
+                    foreach (string error in resultado.Errors)
                     {
                         ModelState.AddModelError("", error);
                     }
@@ -274,6 +278,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             return string.Empty;
         }
 
+
         private string GetQueryString(HttpRequestMessage request, string key)
         {
             var queryStrings = request.GetQueryNameValuePairs();
@@ -296,8 +301,6 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
 
             if (provider == "Facebook")
             {
-                //You can get it from here: https://developers.facebook.com/tools/accesstoken/
-                //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
                 var appToken = "xxxxxx";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
@@ -347,6 +350,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
             return parsedToken;
         }
 
+
         private JObject GenerateLocalAccessTokenResponse(string userName)
         {
 
@@ -395,7 +399,7 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
                     return null;
                 }
 
-                var providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
                 if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer) || String.IsNullOrEmpty(providerKeyClaim.Value))
                 {

@@ -45,7 +45,7 @@ app.config(function ($routeProvider) {
 });
 
 //var serviceBase = 'http://localhost:9660';
-var serviceBase = 'http://glauthenticationdesafioconcrete.azurewebsites.net/';
+var serviceBase = 'https://glauthenticationdesafioconcrete.azurewebsites.net/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'

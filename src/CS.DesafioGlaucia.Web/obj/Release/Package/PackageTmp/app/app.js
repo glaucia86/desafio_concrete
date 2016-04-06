@@ -1,6 +1,5 @@
 ﻿/* Arquivo responsável para a manipulação das páginas via controller através do
-AngularJs * /
- */
+AngularJs **/
 
 var app = angular.module('SpaApplicationAuthApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
 
@@ -32,20 +31,21 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/tokens", {
-        controller: "tokensController",
-        templateUrl: "/app/view/tokens.html"
+        controller: "tokensManagerController",
+        templateUrl: "/app/views/tokens.html"
     });
 
     $routeProvider.when("/associate", {
         controller: "associateController",
-        templateUrl:"/app/view/associate.html"
+        templateUrl:"/app/views/associate.html"
     });
 
     /*Redirecionar para a Página Principal quando clicar em qualquer parte da página*/
     $routeProvider.otherwise({ redirectTo: "/home" });
 });
 
-var serviceBase = 'https://glauthenticationdesafioconcrete.azurewebsites.net/';
+//var serviceBase = 'http://localhost:9660';
+var serviceBase = 'http://glauthenticationdesafioconcrete.azurewebsites.net/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
@@ -55,7 +55,6 @@ app.config(function($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
 });
 
-app.run([
-    'authService', function (authService) {
+app.run(['authService', function (authService) {
         authService.fillAuthData();
 }]);

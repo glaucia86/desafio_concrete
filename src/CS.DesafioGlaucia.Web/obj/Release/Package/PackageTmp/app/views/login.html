@@ -1,9 +1,30 @@
-﻿<form class="form-login" role="form">
-    <h2 class="form-login-heading">Entrar</h2>
-    <input type="text" class="form-control" placeholder="Usuário" data-ng-model="loginData.usuario" required autofocus />
-    <input type="password" class="form-control" placeholder="Senha" data-ng-model="loginData.senha" required />
-    <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="login()">Entrar</button>
-    <div data-ng-hide="message == ''" class="alert alert-danger">
-        {{message}}
-    </div>
+﻿<form role="form">
+    <div class="row">
+        <div class="col-md-2">
+            &nbsp;
+        </div>
+        <div class="col-md-4">
+            <h2 class="form-login-heading">Login</h2>
+            <input type="text" class="form-control" placeholder="Usuário" data-ng-model="loginData.usuario" required autofocus>
+            <input type="password" class="form-control" placeholder="Senha" data-ng-model="loginData.senha" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" data-ng-model="loginData.useRefreshTokens"><strong> Use o Refreh Token</strong>
+                </label>
+            </div>
+            <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
+            <div data-ng-hide="message == ''" class="alert alert-danger">
+                {{message}}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2 class="form-login-heading">Social Mídias</h2>
+            <p> Ou você pode efetuar o login usando uma das redes sociais abaixo</p>
+            <button class="btn btn-large btn-facebook btn-block" type="button" data-ng-click="authExternalProvider('Facebook')"><i class="fa fa-facebook"></i> | Conectar com Facebook</button>
+            <button class="btn btn-large btn-google-plus btn-block" type="button" data-ng-click="authExternalProvider('Google')"><i class="fa fa-google-plus"></i> | Conectar com Google+</button>
+        </div>
+        <div class="col-md-2">
+            &nbsp;
+        </div>
+    </div>  
 </form>

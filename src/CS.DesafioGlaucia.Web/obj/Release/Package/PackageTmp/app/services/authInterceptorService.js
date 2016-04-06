@@ -3,7 +3,7 @@
 'use strict';
 
 app.factory('authInterceptorService', [
-    '$q', '$location', 'localStorageService', function ($q, $location, localStorageService) {
+    '$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
 
         var authInterceptorServiceFactory = {};
 
@@ -41,5 +41,4 @@ app.factory('authInterceptorService', [
         authInterceptorServiceFactory.responseError = _responseError;
 
         return authInterceptorServiceFactory;
-    }
-]);
+}]);

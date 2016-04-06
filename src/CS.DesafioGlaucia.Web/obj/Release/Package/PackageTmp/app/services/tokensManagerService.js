@@ -24,5 +24,4 @@ app.factory('tokensManagerService', ['$http', 'ngAuthSettings', function ($http,
     tokenManagerServiceFactory.getRefreshTokens = _getRefreshTokens;
 
     return tokenManagerServiceFactory;
-
 }]);
