@@ -1,9 +1,14 @@
 ﻿<form class="form-login" role="form">
+
     <h2 class="form-login-heading">Cadastrar</h2>
-    <input type="text" class="form-control" placeholder="Usuário" data-ng-model="registration.usuario" required autofocus/>
-    <input type="password" class="form-control" placeholder="Senha" data-ng-model="registration.senha" required/>
-    <input type="password" class="form-control" placeholder="Confirme a Senha" data-ng-model="registration.confirmaSenha" required/>
+
+    <input type="text" class="form-control" placeholder="Usuário" data-ng-model="registration.userName" required autofocus />
+    <input type="password" class="form-control" placeholder="Senha" data-ng-model="registration.password" required />
+    <input type="password" class="form-control" placeholder="Confirme a Senha" data-ng-model="registration.confirmPassword" required />
+
     <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="signUp()">Registrar</button>
+
+
     <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-sucess': 'alert alert-danger'">
         {{message}}
     </div>
