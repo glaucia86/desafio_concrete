@@ -8,6 +8,7 @@ app.controller('tokensManagerController', ['$scope', 'tokensManagerService', fun
         $scope.refreshTokens = resultados.data;
 
     }, function (error) {
+
         alert(error.data.message);
     });
 
@@ -20,6 +21,7 @@ app.controller('tokensManagerController', ['$scope', 'tokensManagerService', fun
             $scope.refreshTokens.splice(index, 1);
 
         }, function (error) {
+
             alert(error.data.message);
         });
     }
