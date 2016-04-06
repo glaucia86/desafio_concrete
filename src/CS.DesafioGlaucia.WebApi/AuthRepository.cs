@@ -9,9 +9,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace CS.DesafioGlaucia.WebApi
 {
-    /* Aqui estou definindo a parte lógica com respeito ao usuário. 
-     * a propriedade "UserManager" será o responsável para poder criptografar a senha, como e quando validar o
-       usuário e para gerenciar os claims da aplicação */
+/* Aqui estou definindo a parte lógica com respeito ao usuário. A propriedade "UserManager" será o responsável para poder criptografar a senha, como e quando validar o
+usuário e para gerenciar os claims da aplicação */
     public class AuthRepository : IDisposable
     {
         private AuthContext context;
@@ -22,6 +21,7 @@ namespace CS.DesafioGlaucia.WebApi
             context = new AuthContext();
             userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(context));
         }
+
 
         public async Task<IdentityResult> RegistrarUsuario(UsuarioModel usuarioModel)
         {
@@ -35,12 +35,14 @@ namespace CS.DesafioGlaucia.WebApi
             return resultado;
         }
 
+
         public async Task<IdentityUser> EncontrarUsuario(string usuario, string senha)
         {
-            var user = await userManager.FindAsync(usuario, senha);
+            IdentityUser user = await userManager.FindAsync(usuario, senha);
 
             return user;
         }
+
 
         public Cliente EncontrarCliente(string clientId)
         {
@@ -52,8 +54,7 @@ namespace CS.DesafioGlaucia.WebApi
 
         public async Task<bool> AdicionarRefreshToken(RefreshToken token)
         {
-            var tokenExistente =
-                context.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId)
+            var tokenExistente = context.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId)
                     .SingleOrDefault();
 
             if (tokenExistente != null)
@@ -66,6 +67,7 @@ namespace CS.DesafioGlaucia.WebApi
             return await context.SaveChangesAsync() > 0;
         }
 
+
         public async Task<bool> RemoverRefreshToken(string refreshTokenId)
         {
             var refreshToken = await context.RefreshTokens.FindAsync(refreshTokenId);
@@ -73,17 +75,21 @@ namespace CS.DesafioGlaucia.WebApi
             if (refreshToken != null)
             {
                 context.RefreshTokens.Remove(refreshToken);
+
                 return await context.SaveChangesAsync() > 0;
             }
 
             return false;
         }
 
+
         public async Task<bool> RemoverRefreshToken(RefreshToken refreshToken)
         {
             context.RefreshTokens.Remove(refreshToken);
+
             return await context.SaveChangesAsync() > 0;
         }
+
 
         public async Task<RefreshToken> EncontrarRefreshToken(string refreshTokenId)
         {
@@ -92,6 +98,7 @@ namespace CS.DesafioGlaucia.WebApi
             return refreshToken;
         }
 
+
         public List<RefreshToken> SelecionarTodosRefreshToken()
         {
             return context.RefreshTokens.ToList();
@@ -99,10 +106,11 @@ namespace CS.DesafioGlaucia.WebApi
 
         public async Task<IdentityUser> FindAsync(UserLoginInfo loginInfo)
         {
-            var user = await userManager.FindAsync(loginInfo);
+            IdentityUser user = await userManager.FindAsync(loginInfo);
 
             return user;
         }
+
 
         public async Task<IdentityResult> CreateAsync(IdentityUser user)
         {
@@ -111,12 +119,14 @@ namespace CS.DesafioGlaucia.WebApi
             return resultado;
         }
 
+
         public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
         {
             var resultado = await userManager.AddLoginAsync(userId, login);
 
             return resultado;
         }
+
 
         public void Dispose()
         {
