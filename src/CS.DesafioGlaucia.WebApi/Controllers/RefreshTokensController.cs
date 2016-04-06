@@ -6,20 +6,22 @@ namespace CS.DesafioGlaucia.WebApi.Controllers
     [RoutePrefix("api/RefreshTokens")]
     public class RefreshTokensController : ApiController
     {
-        private readonly AuthRepository repository;
+        private AuthRepository repository;
 
         public RefreshTokensController()
         {
             repository = new AuthRepository();
         }
 
-        [AllowAnonymous]
+        [Authorize(Users = "Admin")]
         [Route("")]
         public IHttpActionResult Get()
         {
             return Ok(repository.SelecionarTodosRefreshToken());
         }
 
+        [AllowAnonymous]
+        [Route("")]
         public async Task<IHttpActionResult> Remover(string tokenId)
         {
             var resultado = await repository.RemoverRefreshToken(tokenId);

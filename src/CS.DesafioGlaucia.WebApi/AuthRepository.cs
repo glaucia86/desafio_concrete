@@ -14,8 +14,8 @@ namespace CS.DesafioGlaucia.WebApi
        usuário e para gerenciar os claims da aplicação */
     public class AuthRepository : IDisposable
     {
-        private readonly AuthContext context;
-        private readonly UserManager<IdentityUser> userManager;
+        private AuthContext context;
+        private UserManager<IdentityUser> userManager;
 
         public AuthRepository()
         {
@@ -44,7 +44,7 @@ namespace CS.DesafioGlaucia.WebApi
 
         public Cliente EncontrarCliente(string clientId)
         {
-            var cliente = context.Clientes.Find(clientId);
+            var cliente = context.Clients.Find(clientId);
 
             return cliente;
         }
