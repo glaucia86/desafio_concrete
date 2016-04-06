@@ -6,7 +6,7 @@
 
 app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
 
-    var serviceBase = 'https://glauthenticationdesafioconcrete.azurewebsites.net/';
+    var serviceBase = ngAuthSettings.apiServiceBaseUrl;
     var authServiceFactory = {};
 
     var _authentication = {

@@ -45,7 +45,7 @@ app.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: "/home" });
 });
 
-var serviceBase = 'http://glauthenticationdesafioconcrete.azurewebsites.net/';
+var serviceBase = 'https://glauthenticationdesafioconcrete.azurewebsites.net/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
