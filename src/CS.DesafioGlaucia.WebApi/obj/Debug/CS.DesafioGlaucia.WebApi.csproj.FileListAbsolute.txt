@@ -42,3 +42,5 @@ C:\Users\Glaucia\Documents\Labs\desafio_concrete\src\CS.DesafioGlaucia.WebApi\bi
 C:\Users\Glaucia\Documents\Labs\desafio_concrete\src\CS.DesafioGlaucia.WebApi\bin\Microsoft.Owin.Security.Google.dll
 C:\Users\Glaucia\Documents\Labs\desafio_concrete\src\CS.DesafioGlaucia.WebApi\bin\Microsoft.Owin.Security.Facebook.xml
 C:\Users\Glaucia\Documents\Labs\desafio_concrete\src\CS.DesafioGlaucia.WebApi\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Glaucia\Documents\Labs\desafio_concrete\src\CS.DesafioGlaucia.WebApi\bin\System.Web.Http.Cors.dll
+C:\Users\Glaucia\Documents\Labs\desafio_concrete\src\CS.DesafioGlaucia.WebApi\bin\System.Web.Http.Cors.xml

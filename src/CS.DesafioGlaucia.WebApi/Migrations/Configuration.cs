@@ -37,7 +37,7 @@ namespace CS.DesafioGlaucia.WebApi.Migrations
                     ApplicationType =  Models.ApplicationTypes.JavaScript, 
                     Active = true, 
                     RefreshTokenLifeTime = 7200, 
-                    AllowedOrigin = "http://glauthenticationdesafioconcrete.azurewebsites.net"
+                    AllowedOrigin = "https://glauthenticationdesafioconcrete.azurewebsites.net"
                 },
 
                 new Cliente
